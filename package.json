@@ -2,6 +2,19 @@
   "name": "landing-page",
   "version": "0.1.0",
   "private": true,
+  "description": "landing-page",
+  "author": "Hayk Ghazaryan <hayk.ghazaryanc@gmail.com> (https://github.com/ghazaryan81/landing-page.git)",
+  "keywords": [
+    ""
+  ],
+  "repository": {
+    "type": "git",
+    "url": "git+ssh@github.com:ghazaryan81/landing-page.git"
+  },
+  "bugs": {
+    "url": "https://github.com/ghazaryan81/landing-page/issues/",
+    "email": "hayk.ghazaryanc@gmail.com"
+  },
   "scripts": {
     "dev": "next dev",
     "build": "next build",
