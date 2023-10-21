@@ -16,24 +16,47 @@
     "email": "hayk.ghazaryanc@gmail.com"
   },
   "scripts": {
-    "dev": "next dev",
+    "======================== DEV =========================": "========================",
+    "dev": "npm run dev:watchers",
+    "dev:watchers": "npx nodemon --watch next.config.js --watch package.json --watch tsconfig.json --watch ./data/run --watch ./src/styles-common/tailwind-in.css --exec npm run dev:run",
+    "dev:run": "npm run kill-port & concurrently \"npm run data:todo\" \"npm run data:menu\" \"npm run tailwind\" \"npm run next:run\"",
+    "next:run": "next dev",
+    "======================== BUILD =======================": "========================",
     "build": "next build",
     "start": "next start",
     "lint": "next lint",
     "======================== PRETTIER ====================": "========================",
     "prettier:fix": "npm run prettier -- --write",
-    "prettier": "prettier --config \"./.prettierrc\" --check \"./src/**/*.{js,jsx,ts,tsx,css,scss,sass,styl,less}\" --ignore-path \"./.prettierignore\"",
+    "prettier": "npx prettier --config \"./.prettierrc\" --check \"./src/**/*.{js,jsx,ts,tsx,css,scss,sass,styl,less}\" --ignore-path \"./.prettierignore\"",
+    "======================== STYLELINT ===================": "========================",
+    "stylelint:fix": "npm run stylelint -- --fix",
+    "stylelint": "npx stylelint './src/styles/**/*{.css,.scss,.sass,.styl,.less}' --ignore-path \"./.stylelintignore\"",
+    "stylelint:vars": "npx stylelint ./src/styles-common/_variables.scss' --ignore-path \"./.stylelintignore\"",
     "======================== MISC ========================": "========================",
-    "remove": "rimraf build dist",
-    "prepare": "husky install",
-    "tailwind": "tailwindcss -i ./src/styles-common/tailwind-in.css -o ./public/static/styles/tailwind-out.css --watch",
-    "kill-port": "kill-port --port 5173,4173,3000,8080,4001,4002,4003",
+    "remove": "npx rimraf build dist",
+    "prepare": "npx husky install",
+    "tailwind": "npx tailwindcss -i ./src/styles-common/tailwind-in.css -o ./public/static/styles/tailwind-out.css --watch",
+    "kill-port": "npx kill-port --port 5173,4173,3000,8080,4001,4002,4003",
     "======================== DATA ========================": "========================",
-    "data:todo": "json-server -w ./data/run/todo.json -p 4001",
-    "data:menu": "json-server -w ./data/run/menu.json -p 4002",
+    "data:todo": "npx json-server -w ./data/run/todo.json -p 4001",
+    "data:menu": "npx json-server -w ./data/run/menu.json -p 4002",
     "======================= JSON-TO-SCSS =================": "========================",
-    "json-to-scss": "nodemon --watch ./src/styles-common/variables.json --exec npm run json-to-scss:run",
+    "json-to-scss": "npx nodemon --watch ./src/styles-common/variables.json --exec npm run json-to-scss:run",
     "json-to-scss:run": "npx json-to-scss ./src/styles-common/variables.json"
+  },
+  "husky": {
+    "hooks": {
+      "pre-commit": "lint-staged"
+    }
+  },
+  "lint-staged": {
+    "src/styles/**/*.{css,scss,sass,styl,less}": [
+      "npm run stylelint:fix"
+    ],
+    "src/**/*.{js,jsx,ts,tsx,css,scss,styl,less}": [
+      "npm run prettier:fix",
+      "npm run lint"
+    ]
   },
   "dependencies": {
     "@redux-devtools/extension": "^3.2.5",
