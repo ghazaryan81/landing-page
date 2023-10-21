@@ -19,7 +19,21 @@
     "dev": "next dev",
     "build": "next build",
     "start": "next start",
-    "lint": "next lint"
+    "lint": "next lint",
+    "======================== PRETTIER ====================": "========================",
+    "prettier:fix": "npm run prettier -- --write",
+    "prettier": "prettier --config \"./.prettierrc\" --check \"./src/**/*.{js,jsx,ts,tsx,css,scss,sass,styl,less}\" --ignore-path \"./.prettierignore\"",
+    "======================== MISC ========================": "========================",
+    "remove": "rimraf build dist",
+    "prepare": "husky install",
+    "tailwind": "tailwindcss -i ./src/styles-common/tailwind-in.css -o ./public/static/styles/tailwind-out.css --watch",
+    "kill-port": "kill-port --port 5173,4173,3000,8080,4001,4002,4003",
+    "======================== DATA ========================": "========================",
+    "data:todo": "json-server -w ./data/run/todo.json -p 4001",
+    "data:menu": "json-server -w ./data/run/menu.json -p 4002",
+    "======================= JSON-TO-SCSS =================": "========================",
+    "json-to-scss": "nodemon --watch ./src/styles-common/variables.json --exec npm run json-to-scss:run",
+    "json-to-scss:run": "npx json-to-scss ./src/styles-common/variables.json"
   },
   "dependencies": {
     "@redux-devtools/extension": "^3.2.5",

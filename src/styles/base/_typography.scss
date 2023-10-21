@@ -1,0 +1,30 @@
+@use "../../styles/vendors/font-face-generator" as *;
+
+$fonts-path: "../../styles-common/fonts";
+
+$font-file-types: "woff2" "woff";
+
+@include font-face(
+  (
+    "Poppins": (
+      100: "Poppins-Thin",
+      150: "Rubik-Italic",
+      200: "Poppins-ExtraLight",
+      250: "Poppins-ExtraLightItalic",
+      300: "Poppins-Light",
+      350: "Poppins-LightItalic",
+      400: "Poppins-Regular",
+      450: "Poppins-Italic",
+      500: "Poppins-Medium",
+      550: "Poppins-MediumItalic",
+      600: "Poppins-SemiBold",
+      650: "Poppins-SemiBoldItalic",
+      700: "Poppins-Bold",
+      750: "Poppins-BoldItalic",
+      800: "Poppins-ExtraBold",
+      850: "Poppins-ExtraBoldItalic",
+      900: "Poppins-Black",
+      950: "Poppins-BlackItalic"
+    )
+  )
+);
